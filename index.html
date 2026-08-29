@@ -132,7 +132,7 @@
         Invert the hierarchy: the quickstart becomes the homepage, and marketing copy only earns
         its place where it survives sitting next to working code.
       </p>
-      <p class="mt-6 font-mono text-[13px]"><a href="#" class="proof">read the case &rarr;</a></p>
+  <p class="mt-6 font-mono text-[13px]"><a href="work.html#case-01" class="proof">read the case &rarr;</a></p>
     </article>
 
     <article class="rv card p-7 flex flex-col" style="transition-delay:70ms">
@@ -144,7 +144,7 @@
         widest part of the funnel. Publish the structure and the logic behind it, move qualification
         upstream of the call, and make the thinking the exhibit.
       </p>
-      <p class="mt-6 font-mono text-[13px]"><a href="#" class="proof">read the case &rarr;</a></p>
+  <p class="mt-6 font-mono text-[13px]"><a href="work.html#case-02" class="proof">read the case &rarr;</a></p>
     </article>
 
     <article class="rv card p-7 flex flex-col" style="transition-delay:140ms">
@@ -156,7 +156,7 @@
         manufacturer loses that war. So the product page becomes an argument: state plainly what the
         product refuses to do, above the buy button.
       </p>
-      <p class="mt-6 font-mono text-[13px]"><a href="#" class="proof">read the case &rarr;</a></p>
+  <p class="mt-6 font-mono text-[13px]"><a href="work.html#case-03" class="proof">read the case &rarr;</a></p>
     </article>
 
   </div>
@@ -290,183 +290,6 @@
 </footer>
 
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script>
-(() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const root = document.documentElement;
-
-  /* ── Mode: system preference first, explicit choice wins. ─────── */
-  const dot = document.getElementById('themeDot');
-  const btn = document.getElementById('theme');
-  const setTheme = t => {
-    root.dataset.theme = t;
-    dot.textContent = t === 'dark' ? '●' : '○';
-    btn.setAttribute('aria-pressed', String(t === 'dark'));
-  };
-  setTheme(localStorage.getItem('wa-theme')
-    || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-  btn.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('wa-theme', next);
-    setTheme(next);
-  });
-
-  /* ── Load sequence: hairline fills, then the page. Once a session. */
-  const hairline = document.getElementById('hairline');
-  const boot = () => {
-    document.body.classList.replace('booting', 'booted');
-    hairline.classList.add('done');
-    typeOn();
-    reveal();
-  };
-  if (reduce || sessionStorage.getItem('wa-booted')) {
-    hairline.style.display = 'none';
-    boot();
-  } else {
-    sessionStorage.setItem('wa-booted', '1');
-    requestAnimationFrame(() => { hairline.style.transform = 'scaleX(1)'; });
-    setTimeout(boot, 660);
-  }
-
-  /* ── Hero type-on: characters resolve left → right, ~760ms, once. */
-  function typeOn() {
-    const h = document.getElementById('typeon');
-    if (reduce || sessionStorage.getItem('wa-typed')) return;
-    sessionStorage.setItem('wa-typed', '1');
-    const text = h.textContent.trim().replace(/\s+/g, ' ');
-    h.textContent = '';
-    const step = 760 / text.length;
-    [...text].forEach((ch, i) => {
-      const s = document.createElement('span');
-      s.className = 'char';
-      s.textContent = ch;
-      if (ch === ' ') s.style.whiteSpace = 'pre';
-      h.appendChild(s);
-      setTimeout(() => s.classList.add('lit'), i * step);
-    });
-  }
-
-  /* ── Section headings: split to words so they can rise out of a mask. */
-  function splitWords() {
-    document.querySelectorAll('.wr').forEach(h => {
-      const words = h.textContent.trim().split(/\s+/);
-      h.textContent = '';
-      words.forEach((word, i) => {
-        const outer = document.createElement('span');
-        outer.className = 'w';
-        const inner = document.createElement('span');
-        inner.className = 'wi';
-        inner.textContent = word;
-        inner.style.transitionDelay = `${i * 40}ms`;
-        outer.appendChild(inner);
-        h.appendChild(outer);
-        if (i < words.length - 1) h.appendChild(document.createTextNode(' '));
-      });
-    });
-  }
-
-  /* ── Mono counters tick up when their section arrives. ─────────── */
-  function countUp(el) {
-    const to = +el.dataset.count;
-    if (reduce) { el.textContent = String(to).padStart(2, '0'); return; }
-    const t0 = performance.now();
-    (function tick(t) {
-      const p = Math.min((t - t0) / 420, 1);
-      el.textContent = String(Math.round(p * to)).padStart(2, '0');
-      if (p < 1) requestAnimationFrame(tick);
-    })(t0);
-  }
-
-  /* ── Reveal on scroll: once per element, stagger via CSS delay. ── */
-  function reveal() {
-    splitWords();
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('in');
-        e.target.querySelectorAll('[data-count]').forEach(countUp);
-        io.unobserve(e.target);
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-    document.querySelectorAll('.rv, .wr, .shot').forEach(el => io.observe(el));
-  }
-
-  /* ── Smooth scroll: weighted, not floaty. ─────────────────────── */
-  addEventListener('load', () => {
-    const jump = () => document.querySelectorAll('a[href^="#"]').forEach(a =>
-      a.addEventListener('click', e => {
-        const el = document.querySelector(a.getAttribute('href'));
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      }));
-
-    if (reduce || typeof Lenis === 'undefined') return jump();
-
-    const lenis = new Lenis({ lerp: 0.1, duration: 0.9 });
-    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
-    document.querySelectorAll('a[href^="#"]').forEach(a =>
-      a.addEventListener('click', e => {
-        const el = document.querySelector(a.getAttribute('href'));
-        if (!el) return;
-        e.preventDefault();
-        lenis.scrollTo(el, { offset: -56 });
-      }));
-  });
-
-  /* ── Cursor block: the brand mark, as the pointer. ────────────── */
-  if (matchMedia('(pointer:fine)').matches && innerWidth >= 1024 && !reduce) {
-    root.classList.add('has-cursor');
-    const c = document.getElementById('cursor');
-    // The figure leans against the pointer. Cursor-linked rather than
-    // scroll-linked on purpose: scroll parallax is the move every SaaS hero
-    // already makes, and this page already owns the pointer.
-    const fig = document.querySelector('.figure img');
-    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, sx = 1, fx = 0, fy = 0;
-    addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; }, { passive: true });
-    (function loop() {
-      cx += (x - cx) * 0.28;
-      cy += (y - cy) * 0.28;
-      const target = c.classList.contains('on-text') ? 0.2 : 1;
-      sx += (target - sx) * 0.25;
-      c.style.transform =
-        `translate3d(${(cx - 4).toFixed(1)}px, ${(cy - 9).toFixed(1)}px, 0) scaleX(${sx.toFixed(3)})`;
-
-      if (fig) {
-        fx += ((cx / innerWidth - 0.5) * -14 - fx) * 0.06;
-        fy += ((cy / innerHeight - 0.5) * -9 - fy) * 0.06;
-        fig.style.transform =
-          `translate3d(${fx.toFixed(2)}px, ${fy.toFixed(2)}px, 0) scale(1.035)`;
-      }
-      requestAnimationFrame(loop);
-    })();
-    addEventListener('pointerover', e => {
-      c.classList.toggle('on-link', !!e.target.closest('a, button'));
-      c.classList.toggle('on-text', !!e.target.closest('input, textarea'));
-    }, { passive: true });
-  }
-
-  /* ── Note: validate, press feedback, [ sent ] replaces the input. ─ */
-  const form = document.getElementById('signup');
-  const err  = document.getElementById('err');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('email');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) {
-      err.classList.remove('hidden');
-      email.setAttribute('aria-invalid', 'true');
-      email.focus();
-      return;
-    }
-    // ponytail: no backend wired — POST to the list provider here.
-    err.classList.add('hidden');
-    form.classList.add('hidden');
-    const sent = document.getElementById('sent');
-    sent.classList.remove('hidden');
-    sent.setAttribute('role', 'status');
-  });
-})();
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>

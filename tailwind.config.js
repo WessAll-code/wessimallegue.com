@@ -2,7 +2,7 @@
  *  Visual & Verbal World palette. No ad hoc hex values anywhere else.
  *  @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html'],
+  content: ['./*.html'],
   theme: {
     extend: {
       colors: {
