@@ -4,7 +4,7 @@
   "scripts": {
     "build": "node build.js",
     "dev": "tailwindcss -c tailwind.config.js -i src/input.css -o styles.css --watch",
-    "deploy": "node build.js && npx wrangler pages deploy dist"
+    "deploy": "node build.js && npx wrangler@4.127.1 pages deploy dist --project-name=wessimallegue --branch=main"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
