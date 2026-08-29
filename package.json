@@ -2,8 +2,9 @@
   "name": "wessimallegue-com",
   "private": true,
   "scripts": {
-    "build": "tailwindcss -c tailwind.config.js -i src/input.css -o styles.css --minify",
-    "dev": "tailwindcss -c tailwind.config.js -i src/input.css -o styles.css --watch"
+    "build": "node build.js",
+    "dev": "tailwindcss -c tailwind.config.js -i src/input.css -o styles.css --watch",
+    "deploy": "node build.js && npx wrangler pages deploy dist"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
