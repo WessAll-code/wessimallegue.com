@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wessim Allegue — Strategy that ends in a shipped site.</title>
+<meta name="description" content="Brand and website, built as one thing. Not a deck. Not a handoff.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0B0C'/%3E%3Ctext x='3' y='23' font-family='monospace' font-size='15' font-weight='700' fill='%23F7F6F2'%3EWA%3C/text%3E%3Crect x='26' y='7' width='4' height='18' fill='%2300D67D'/%3E%3C/svg%3E">
+
+<link rel="preload" as="image" href="assets/hero-figure.png" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="grain booting font-sans antialiased selection:bg-signal selection:text-ink">
+<div id="hairline"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- Duotone ramps. Luminance → two locked tokens; alpha is preserved, so a
+     cut-out stays a cut-out. Endpoints are the palette's own hex values,
+     which is what stops photography introducing an off-system colour.
+     Ink #0B0B0C = .043 .043 .047 · Slate #6E7078 = .431 .439 .471
+     Paper #F7F6F2 = .969 .965 .949 -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <filter id="duo-ink-paper" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0
+                                         0.2126 0.7152 0.0722 0 0
+                                         0.2126 0.7152 0.0722 0 0
+                                         0      0      0      1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.043 0.969"/>
+      <feFuncG type="table" tableValues="0.043 0.965"/>
+      <feFuncB type="table" tableValues="0.047 0.949"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="duo-ink-slate" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0
+                                         0.2126 0.7152 0.0722 0 0
+                                         0.2126 0.7152 0.0722 0 0
+                                         0      0      0      1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.043 0.431"/>
+      <feFuncG type="table" tableValues="0.043 0.439"/>
+      <feFuncB type="table" tableValues="0.047 0.471"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
+<header class="fixed top-0 inset-x-0 z-50 border-b border-line" style="background:var(--bg)">
+  <nav class="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
+    <a href="#top" class="font-mono text-sm font-medium tracking-meta">
+      <span class="text-signal">&lt;</span>&nbsp;WESSIM ALLEGUE&nbsp;<span class="text-signal">&gt;</span>
+    </a>
+    <div class="flex items-center gap-6 font-mono text-xs tracking-meta text-muted">
+      <a href="#building" class="hidden sm:inline hover:text-fg transition-colors duration-150">building</a>
+      <a href="#writing"  class="hidden sm:inline hover:text-fg transition-colors duration-150">writing</a>
+      <a href="#note"     class="hidden sm:inline hover:text-fg transition-colors duration-150">note</a>
+      <button id="theme" type="button" aria-label="Toggle colour mode" aria-pressed="true"
+              class="hover:text-fg transition-colors duration-150">[&nbsp;<span id="themeDot">●</span>&nbsp;]</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ═══ 01 · HERO — type is the hero ══════════════════════════════ -->
+<section class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden pt-24 pb-16">
+
+  <!-- Ghost wordmark: depth from the locked Line token, not from a fade. -->
+  <span class="ghost hidden sm:block" aria-hidden="true">WESSIM ALLEGUE</span>
+
+  <!-- Cut out locally from the flat-purple original, so he stands directly on
+       Ink — no frame, no rectangle, no seam to hide. Runs off the fold. -->
+  <figure class="shot figure lag order-2 lg:order-none self-center
+                 h-[42vh] mt-12 w-full
+                 lg:mt-0 lg:absolute lg:bottom-0 lg:right-[7vw] lg:w-auto
+                 lg:h-[86vh] lg:max-h-[780px] lg:z-[1]"
+          style="aspect-ratio:547/1150">
+    <img src="assets/hero-figure.png" width="547" height="1150" fetchpriority="high"
+         alt="Wessim Allegue.">
+  </figure>
+
+  <div class="order-1 relative z-10 mx-auto max-w-6xl px-6 w-full">
+    <p class="font-mono text-xs tracking-meta text-signal mb-8">[ BRAND + BUILD ]</p>
+
+    <h1 id="typeon"
+        class="font-semibold tracking-[-0.03em] leading-[1.03]
+               text-[clamp(2.6rem,7vw,5.4rem)] max-w-[13ch]">
+      Strategy that ends in a shipped site.
+    </h1>
+
+    <p class="rv mt-8 max-w-[42ch] lg:max-w-[36ch] text-lg leading-relaxed text-muted"
+       style="transition-delay:60ms">
+      Brand and website, built as one thing. Not a deck. Not a handoff.
+      Every claim on this page ends in something you can open.
+    </p>
+
+    <div class="rv mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-sm"
+         style="transition-delay:120ms">
+      <a href="#building" class="proof always font-medium">[ see the work ]</a>
+      <a href="mailto:wessimallegue@gmail.com" class="proof">start a project &rarr;</a>
+    </div>
+
+    <div class="rv mt-16 lg:mt-24 flex items-center gap-2 font-mono text-xs tracking-meta text-muted"
+         style="transition-delay:180ms">
+      <span class="cue inline-block w-[7px] h-[14px]" style="background:var(--muted)"></span>
+      <span>[ scroll ]</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 · WHAT I'M BUILDING ════════════════════════════════════ -->
+<section id="building" class="mx-auto max-w-6xl px-6 py-24 sm:py-32 border-t border-line scroll-mt-14">
+  <div class="flex items-baseline justify-between gap-6 mb-14">
+    <h2 class="wr text-3xl sm:text-4xl font-semibold tracking-[-0.02em]">What I&rsquo;m Building</h2>
+    <p class="rv font-mono text-xs tracking-meta text-muted whitespace-nowrap">
+      — <span data-count="3">00</span> / building —</p>
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+    <article class="rv card p-7 flex flex-col">
+      <p class="font-mono text-[11px] tracking-meta text-signal">[ SELF-INITIATED / CONCEPT — 01 ]</p>
+      <h3 class="mt-5 text-2xl font-semibold tracking-[-0.015em] leading-tight">The Docs Are The Front Door</h3>
+      <p class="mt-3 font-mono text-xs text-muted">Developer tools · post-Series-A API</p>
+      <p class="mt-5 text-[15px] leading-relaxed text-muted flex-1">
+        Devtool sites are written for the person who signs and read by the person who decides.
+        Invert the hierarchy: the quickstart becomes the homepage, and marketing copy only earns
+        its place where it survives sitting next to working code.
+      </p>
+      <p class="mt-6 font-mono text-[13px]"><a href="#" class="proof">read the case &rarr;</a></p>
+    </article>
+
+    <article class="rv card p-7 flex flex-col" style="transition-delay:70ms">
+      <p class="font-mono text-[11px] tracking-meta text-signal">[ SELF-INITIATED / CONCEPT — 02 ]</p>
+      <h3 class="mt-5 text-2xl font-semibold tracking-[-0.015em] leading-tight">Publish The Price And The Reasoning</h3>
+      <p class="mt-3 font-mono text-xs text-muted">Architecture practice · six people</p>
+      <p class="mt-5 text-[15px] leading-relaxed text-muted flex-1">
+        Hidden fees turn the principal&rsquo;s scarcest hours into unpaid qualification labour at the
+        widest part of the funnel. Publish the structure and the logic behind it, move qualification
+        upstream of the call, and make the thinking the exhibit.
+      </p>
+      <p class="mt-6 font-mono text-[13px]"><a href="#" class="proof">read the case &rarr;</a></p>
+    </article>
+
+    <article class="rv card p-7 flex flex-col" style="transition-delay:140ms">
+      <p class="font-mono text-[11px] tracking-meta text-signal">[ SELF-INITIATED / CONCEPT — 03 ]</p>
+      <h3 class="mt-5 text-2xl font-semibold tracking-[-0.015em] leading-tight">Sell The Constraint</h3>
+      <p class="mt-3 font-mono text-xs text-muted">Single-product hardware · direct</p>
+      <p class="mt-5 text-[15px] leading-relaxed text-muted flex-1">
+        When every page in a category looks identical, competition collapses to price — and a small
+        manufacturer loses that war. So the product page becomes an argument: state plainly what the
+        product refuses to do, above the buy button.
+      </p>
+      <p class="mt-6 font-mono text-[13px]"><a href="#" class="proof">read the case &rarr;</a></p>
+    </article>
+
+  </div>
+
+  <p class="rv mt-10 font-mono text-xs text-muted max-w-[62ch] leading-relaxed">
+    Subjects are fictional composites of real category patterns, labelled as concept work everywhere
+    they appear. No fabricated result metrics — each one carries a stated bet, the alternatives
+    killed, and the number that would prove me wrong.
+  </p>
+</section>
+
+<!-- ═══ 03 · WRITING ══════════════════════════════════════════════ -->
+<section id="writing" class="mx-auto max-w-6xl px-6 py-24 sm:py-32 border-t border-line scroll-mt-14">
+  <div class="flex items-baseline justify-between gap-6 mb-12">
+    <h2 class="wr text-3xl sm:text-4xl font-semibold tracking-[-0.02em]">Writing</h2>
+    <p class="rv font-mono text-xs tracking-meta text-muted whitespace-nowrap">
+      — <span data-count="4">00</span> / writing —</p>
+  </div>
+
+  <ul class="border-t border-line">
+
+    <li class="rv">
+      <a href="#" class="row grid sm:grid-cols-[1fr_auto] gap-x-8 gap-y-2 items-baseline py-6 border-b border-line">
+        <div class="flex items-baseline gap-3">
+          <span class="arrow font-mono text-sm shrink-0" aria-hidden="true">&rarr;</span>
+          <div>
+            <h3 class="text-xl font-medium tracking-[-0.01em]">The Premium Problem</h3>
+            <p class="mt-1.5 text-[15px] text-muted max-w-[60ch]">
+              Parallax stacks and particle fields read as template. Precision reads as expensive.
+            </p>
+          </div>
+        </div>
+        <p class="font-mono text-xs text-muted tabular-nums pl-8 sm:pl-0">2026-08-28 &nbsp;·&nbsp; 6 min</p>
+      </a>
+    </li>
+
+    <li class="rv" style="transition-delay:50ms">
+      <a href="#" class="row grid sm:grid-cols-[1fr_auto] gap-x-8 gap-y-2 items-baseline py-6 border-b border-line">
+        <div class="flex items-baseline gap-3">
+          <span class="arrow font-mono text-sm shrink-0" aria-hidden="true">&rarr;</span>
+          <div>
+            <h3 class="text-xl font-medium tracking-[-0.01em]">Type As A Contract</h3>
+            <p class="mt-1.5 text-[15px] text-muted max-w-[60ch]">
+              Mono is executable. Sans is argued. Break the rule once and the whole system is a lie.
+            </p>
+          </div>
+        </div>
+        <p class="font-mono text-xs text-muted tabular-nums pl-8 sm:pl-0">2026-08-21 &nbsp;·&nbsp; 4 min</p>
+      </a>
+    </li>
+
+    <li class="rv" style="transition-delay:100ms">
+      <a href="#" class="row grid sm:grid-cols-[1fr_auto] gap-x-8 gap-y-2 items-baseline py-6 border-b border-line">
+        <div class="flex items-baseline gap-3">
+          <span class="arrow font-mono text-sm shrink-0" aria-hidden="true">&rarr;</span>
+          <div>
+            <h3 class="text-xl font-medium tracking-[-0.01em]">Qualification Is A P&amp;L Decision</h3>
+            <p class="mt-1.5 text-[15px] text-muted max-w-[60ch]">
+              A discovery call isn&rsquo;t a funnel stage. It&rsquo;s a subsidy, paid in the founder&rsquo;s hours.
+            </p>
+          </div>
+        </div>
+        <p class="font-mono text-xs text-muted tabular-nums pl-8 sm:pl-0">2026-08-14 &nbsp;·&nbsp; 5 min</p>
+      </a>
+    </li>
+
+    <li class="rv" style="transition-delay:150ms">
+      <a href="#" class="row grid sm:grid-cols-[1fr_auto] gap-x-8 gap-y-2 items-baseline py-6 border-b border-line">
+        <div class="flex items-baseline gap-3">
+          <span class="arrow font-mono text-sm shrink-0" aria-hidden="true">&rarr;</span>
+          <div>
+            <h3 class="text-xl font-medium tracking-[-0.01em]">Constraints Are The Only Uncopyable Claim</h3>
+            <p class="mt-1.5 text-[15px] text-muted max-w-[60ch]">
+              Photography, story and tone are copyable within a quarter. What you refuse to do isn&rsquo;t.
+            </p>
+          </div>
+        </div>
+        <p class="font-mono text-xs text-muted tabular-nums pl-8 sm:pl-0">2026-08-07 &nbsp;·&nbsp; 5 min</p>
+      </a>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ═══ 04 · NOTE — full-bleed hairline above and below ═══════════ -->
+<section id="note" class="border-y border-line scroll-mt-14">
+  <div class="mx-auto max-w-3xl px-6 py-24 sm:py-28 text-center">
+    <p class="rv font-mono text-xs tracking-meta text-signal mb-6">[ THE NOTE ]</p>
+    <p class="rv text-xl sm:text-2xl font-medium tracking-[-0.015em] leading-snug max-w-[34ch] mx-auto"
+       style="transition-delay:60ms">
+      One note when something ships, with the reasoning attached.
+    </p>
+
+    <form id="signup" class="rv mt-10 max-w-md mx-auto" style="transition-delay:120ms" novalidate>
+      <label for="email" class="sr-only">Email address</label>
+      <div class="flex items-center gap-3 border-b border-line py-3 focus-within:border-signal transition-colors duration-150">
+        <span class="font-mono text-sm text-signal shrink-0" aria-hidden="true">&gt;</span>
+        <input id="email" name="email" type="email" required autocomplete="email"
+               placeholder="you@company.com" aria-describedby="err"
+               class="flex-1 bg-transparent font-mono text-sm outline-none min-w-0" style="color:var(--fg)">
+        <span class="caret font-mono text-sm text-muted shrink-0" aria-hidden="true">▍</span>
+        <button id="submit" type="submit" class="font-mono text-sm text-muted hover:text-signal shrink-0">[ send ]</button>
+      </div>
+      <p id="err" class="hidden mt-3 font-mono text-xs text-muted text-left">[ that address doesn&rsquo;t parse ]</p>
+    </form>
+
+    <p id="sent" class="hidden mt-10 font-mono text-sm text-signal">[ sent ]</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+<footer class="mx-auto max-w-6xl px-6 py-12 flex flex-wrap items-center justify-between gap-6
+               font-mono text-xs tracking-meta text-muted">
+  <div class="flex items-center gap-4">
+    <figure class="shot plate relative w-14 h-14 shrink-0">
+      <img src="assets/mirror.jpg" width="741" height="741" loading="lazy" alt="">
+    </figure>
+    <span class="inline-flex items-center gap-[3px] px-2 py-1 font-mono text-sm font-bold tracking-normal"
+          style="background:var(--fg); color:var(--bg)" aria-label="WA">
+      WA<span class="w-[4px] h-[15px] bg-signal"></span>
+    </span>
+    <span>© 2026</span>
+  </div>
+  <div class="flex flex-wrap items-center gap-x-7 gap-y-3">
+    <a href="mailto:wessimallegue@gmail.com" class="proof">email</a>
+    <a href="#" class="proof">linkedin</a>
+    <a href="#" class="proof">lighthouse report</a>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  /* ── Mode: system preference first, explicit choice wins. ─────── */
+  const dot = document.getElementById('themeDot');
+  const btn = document.getElementById('theme');
+  const setTheme = t => {
+    root.dataset.theme = t;
+    dot.textContent = t === 'dark' ? '●' : '○';
+    btn.setAttribute('aria-pressed', String(t === 'dark'));
+  };
+  setTheme(localStorage.getItem('wa-theme')
+    || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('wa-theme', next);
+    setTheme(next);
+  });
+
+  /* ── Load sequence: hairline fills, then the page. Once a session. */
+  const hairline = document.getElementById('hairline');
+  const boot = () => {
+    document.body.classList.replace('booting', 'booted');
+    hairline.classList.add('done');
+    typeOn();
+    reveal();
+  };
+  if (reduce || sessionStorage.getItem('wa-booted')) {
+    hairline.style.display = 'none';
+    boot();
+  } else {
+    sessionStorage.setItem('wa-booted', '1');
+    requestAnimationFrame(() => { hairline.style.transform = 'scaleX(1)'; });
+    setTimeout(boot, 660);
+  }
+
+  /* ── Hero type-on: characters resolve left → right, ~760ms, once. */
+  function typeOn() {
+    const h = document.getElementById('typeon');
+    if (reduce || sessionStorage.getItem('wa-typed')) return;
+    sessionStorage.setItem('wa-typed', '1');
+    const text = h.textContent.trim().replace(/\s+/g, ' ');
+    h.textContent = '';
+    const step = 760 / text.length;
+    [...text].forEach((ch, i) => {
+      const s = document.createElement('span');
+      s.className = 'char';
+      s.textContent = ch;
+      if (ch === ' ') s.style.whiteSpace = 'pre';
+      h.appendChild(s);
+      setTimeout(() => s.classList.add('lit'), i * step);
+    });
+  }
+
+  /* ── Section headings: split to words so they can rise out of a mask. */
+  function splitWords() {
+    document.querySelectorAll('.wr').forEach(h => {
+      const words = h.textContent.trim().split(/\s+/);
+      h.textContent = '';
+      words.forEach((word, i) => {
+        const outer = document.createElement('span');
+        outer.className = 'w';
+        const inner = document.createElement('span');
+        inner.className = 'wi';
+        inner.textContent = word;
+        inner.style.transitionDelay = `${i * 40}ms`;
+        outer.appendChild(inner);
+        h.appendChild(outer);
+        if (i < words.length - 1) h.appendChild(document.createTextNode(' '));
+      });
+    });
+  }
+
+  /* ── Mono counters tick up when their section arrives. ─────────── */
+  function countUp(el) {
+    const to = +el.dataset.count;
+    if (reduce) { el.textContent = String(to).padStart(2, '0'); return; }
+    const t0 = performance.now();
+    (function tick(t) {
+      const p = Math.min((t - t0) / 420, 1);
+      el.textContent = String(Math.round(p * to)).padStart(2, '0');
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* ── Reveal on scroll: once per element, stagger via CSS delay. ── */
+  function reveal() {
+    splitWords();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('[data-count]').forEach(countUp);
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    document.querySelectorAll('.rv, .wr, .shot').forEach(el => io.observe(el));
+  }
+
+  /* ── Smooth scroll: weighted, not floaty. ─────────────────────── */
+  addEventListener('load', () => {
+    const jump = () => document.querySelectorAll('a[href^="#"]').forEach(a =>
+      a.addEventListener('click', e => {
+        const el = document.querySelector(a.getAttribute('href'));
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }));
+
+    if (reduce || typeof Lenis === 'undefined') return jump();
+
+    const lenis = new Lenis({ lerp: 0.1, duration: 0.9 });
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach(a =>
+      a.addEventListener('click', e => {
+        const el = document.querySelector(a.getAttribute('href'));
+        if (!el) return;
+        e.preventDefault();
+        lenis.scrollTo(el, { offset: -56 });
+      }));
+  });
+
+  /* ── Cursor block: the brand mark, as the pointer. ────────────── */
+  if (matchMedia('(pointer:fine)').matches && innerWidth >= 1024 && !reduce) {
+    root.classList.add('has-cursor');
+    const c = document.getElementById('cursor');
+    // The figure leans against the pointer. Cursor-linked rather than
+    // scroll-linked on purpose: scroll parallax is the move every SaaS hero
+    // already makes, and this page already owns the pointer.
+    const fig = document.querySelector('.figure img');
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, sx = 1, fx = 0, fy = 0;
+    addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; }, { passive: true });
+    (function loop() {
+      cx += (x - cx) * 0.28;
+      cy += (y - cy) * 0.28;
+      const target = c.classList.contains('on-text') ? 0.2 : 1;
+      sx += (target - sx) * 0.25;
+      c.style.transform =
+        `translate3d(${(cx - 4).toFixed(1)}px, ${(cy - 9).toFixed(1)}px, 0) scaleX(${sx.toFixed(3)})`;
+
+      if (fig) {
+        fx += ((cx / innerWidth - 0.5) * -14 - fx) * 0.06;
+        fy += ((cy / innerHeight - 0.5) * -9 - fy) * 0.06;
+        fig.style.transform =
+          `translate3d(${fx.toFixed(2)}px, ${fy.toFixed(2)}px, 0) scale(1.035)`;
+      }
+      requestAnimationFrame(loop);
+    })();
+    addEventListener('pointerover', e => {
+      c.classList.toggle('on-link', !!e.target.closest('a, button'));
+      c.classList.toggle('on-text', !!e.target.closest('input, textarea'));
+    }, { passive: true });
+  }
+
+  /* ── Note: validate, press feedback, [ sent ] replaces the input. ─ */
+  const form = document.getElementById('signup');
+  const err  = document.getElementById('err');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) {
+      err.classList.remove('hidden');
+      email.setAttribute('aria-invalid', 'true');
+      email.focus();
+      return;
+    }
+    // ponytail: no backend wired — POST to the list provider here.
+    err.classList.add('hidden');
+    form.classList.add('hidden');
+    const sent = document.getElementById('sent');
+    sent.classList.remove('hidden');
+    sent.setAttribute('role', 'status');
+  });
+})();
+</script>
+</body>
+</html>

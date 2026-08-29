@@ -1,0 +1,11 @@
+{
+  "name": "wessimallegue-com",
+  "private": true,
+  "scripts": {
+    "build": "tailwindcss -c tailwind.config.js -i src/input.css -o styles.css --minify",
+    "dev": "tailwindcss -c tailwind.config.js -i src/input.css -o styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
