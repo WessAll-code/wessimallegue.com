@@ -154,6 +154,22 @@
     }, { passive: true });
   }
 
+  /* ── A bare mailto: silently does nothing on a machine with no mail
+     client, which is most work laptops — so the primary CTA could look
+     broken. Copy the address too, and say so in the same mono confirmation
+     grammar as [ sent ]. The mailto still fires for anyone who has a client. */
+  document.querySelectorAll("a.mail").forEach(a => {
+    a.addEventListener("click", () => {
+      const addr = a.getAttribute("href").replace("mailto:", "");
+      if (!navigator.clipboard) return;
+      const label = a.textContent;
+      navigator.clipboard.writeText(addr).then(() => {
+        a.textContent = "[ copied — " + addr + " ]";
+        setTimeout(() => { a.textContent = label; }, 2000);
+      }).catch(() => {});
+    });
+  });
+
   /* ── Note: validate, press feedback, [ sent ] replaces the input. ─ */
   const form = document.getElementById('signup');
   if (!form) return;                                // inner pages have no note form
