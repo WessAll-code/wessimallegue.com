@@ -1,0 +1,25 @@
+# Wessim Allegue
+
+> Brand strategy that ends in a shipped site. Brand and website built as one thing — not a deck, not a handoff.
+
+Independent brand strategist and builder. The working principle across this site is that every claim ends in something you can open: each project links to a case study or a live URL, and each argument links to the writing behind it.
+
+Case studies published here are self-initiated concept work, labelled as such everywhere they appear. Their subjects are fictional composites of real category patterns. They contain no result metrics, by design — what they carry instead is a stated strategic bet, the alternatives that were rejected and why, and the number that would prove the bet wrong. Real metrics get added when real projects ship.
+
+## Pages
+
+- [Home](https://wessimallegue.com/): Positioning, current work, writing, and contact.
+- [Three Concept Case Studies](https://wessimallegue.com/work): Devtool site led by its quickstart rather than its marketing; an architecture practice that publishes its fee structure and the reasoning behind it; a single-product hardware brand that sells its constraints instead of its lifestyle photography.
+
+## Writing
+
+- [A Brand You Can't Ship Isn't a Brand](https://wessimallegue.medium.com/a-brand-you-cant-ship-isn-t-a-brand-ed8ccc5e5cbc): Founders who are rigorous about product are often loose about brand, because what was sold to them as brand was decoration rather than infrastructure.
+- [The Deck Is Not the Deliverable](https://wessimallegue.medium.com/the-deck-is-not-the-deliverable-5f5c4e56acee): Most brand strategy work stops at the artifact instead of the outcome. A slide is not a spec, and it never has to survive contact with a customer.
+- [I Stopped Applying to Marketing Jobs](https://wessimallegue.medium.com/i-stopped-applying-to-marketing-jobs-heres-what-changed-my-mind-96c75cfbae44): On AI, applicant filtering, and the marketing career that no longer exists in the shape it was trained for.
+- [6 Marketing Lessons From 'Wicker'](https://wessimallegue.medium.com/6-marketing-lessons-from-wicker-the-movie-that-made-the-internet-thirst-for-a-basket-43ba26ca31a4): How a rom-com with a tenth of the budget out-marketed the films it opened against.
+- [All writing](https://wessimallegue.medium.com/): Full archive.
+
+## Contact
+
+- [Email](mailto:hello@wessimallegue.com): hello@wessimallegue.com
+- [LinkedIn](https://www.linkedin.com/in/wessim-allegue-943549150/): Professional profile.

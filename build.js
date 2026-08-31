@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 const OUT = 'dist';
-const COPY = ['index.html', 'work.html', 'app.js', 'styles.css', 'robots.txt', 'sitemap.xml'];
+const COPY = ['index.html', 'work.html', 'app.js', 'styles.css', 'robots.txt', 'sitemap.xml', 'llms.txt'];
 
 // 1. Compile the stylesheet. Stays at the root too, so opening index.html
 //    straight off disk still works for a quick local look.
