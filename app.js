@@ -73,18 +73,6 @@
     });
   }
 
-  /* ── Mono counters tick up when their section arrives. ─────────── */
-  function countUp(el) {
-    const to = +el.dataset.count;
-    if (reduce) { el.textContent = String(to).padStart(2, '0'); return; }
-    const t0 = performance.now();
-    (function tick(t) {
-      const p = Math.min((t - t0) / 420, 1);
-      el.textContent = String(Math.round(p * to)).padStart(2, '0');
-      if (p < 1) requestAnimationFrame(tick);
-    })(t0);
-  }
-
   /* ── Reveal on scroll: once per element, stagger via CSS delay. ── */
   function reveal() {
     splitWords();
@@ -92,7 +80,6 @@
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         e.target.classList.add('in');
-        e.target.querySelectorAll('[data-count]').forEach(countUp);
         io.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
