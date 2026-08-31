@@ -10,8 +10,9 @@
     dot.textContent = t === 'dark' ? '●' : '○';
     btn.setAttribute('aria-pressed', String(t === 'dark'));
   };
-  setTheme(localStorage.getItem('wa-theme')
-    || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  // Ink is the brand's default surface, so dark leads regardless of the
+  // visitor's system setting. An explicit toggle is still remembered.
+  setTheme(localStorage.getItem('wa-theme') || 'dark');
   btn.addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('wa-theme', next);

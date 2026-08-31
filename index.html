@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Runs before first paint: the page must never flash the wrong surface.
+     Dark leads by default; a remembered toggle wins. -->
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('wa-theme')||'dark'}catch(e){}</script>
 <title>Wessim Allegue — Strategy that ends in a shipped site.</title>
 <meta name="description" content="Brand and website, built as one thing. Not a deck. Not a handoff.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0B0C'/%3E%3Ctext x='3' y='23' font-family='monospace' font-size='15' font-weight='700' fill='%23F7F6F2'%3EWA%3C/text%3E%3Crect x='26' y='7' width='4' height='18' fill='%2300D67D'/%3E%3C/svg%3E">
