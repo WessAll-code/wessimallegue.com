@@ -93,13 +93,18 @@ body.booted  main, body.booted  header, body.booted  footer{
 .shot.in::after{ transform:translate3d(0,101%,0) }
 .shot.lag::after{ transition-delay:420ms }   /* let the type-on finish first */
 
-/* Cut-out figure: real alpha, no frame, no blend. Full Ink→Paper range and
-   hard contrast, so the dark trousers sink into Ink and he bleeds off the
-   fold instead of ending on a straight edge. Light mode compresses to the
-   dark half (Ink→Slate) or the bright shirt would vanish into Paper. */
+/* Cut-out figure: real alpha, no frame, no blend.
+   Held at 55% saturation rather than duotoned. Duotone forced the figure
+   onto one ramp per mode, and on Paper that produced a heavy dark mass with
+   none of the shirt left — a person rendered as a silhouette. Pulling the
+   saturation down instead takes the orange to a terracotta that sits beside
+   the palette without shouting, keeps skin readable, and still lets the dark
+   trousers fall away into Ink so he bleeds off the fold. One treatment now
+   covers both modes; only the contrast differs, because Paper needs less
+   separation than Ink does. Hover restores full colour. */
 .figure img{ display:block; width:100%; height:100%; object-fit:contain;
-             filter:url(#duo-ink-paper) contrast(1.45); will-change:transform }
-[data-theme="light"] .figure img{ filter:url(#duo-ink-slate) contrast(1.45) }
+             filter:saturate(.55) contrast(1.08); will-change:transform }
+[data-theme="light"] .figure img{ filter:saturate(.55) contrast(1.02) }
 
 /* Framed plate: full Ink→Paper range inside a hairline. */
 .plate{ border:1px solid var(--line); transition:border-color 150ms ease-out }
